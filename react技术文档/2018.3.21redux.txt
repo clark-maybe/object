@@ -1,0 +1,31 @@
+redux
+
+1.redux假定从来不改变你的数据
+
+2.redux不关心如何储存状态，可以是一个普通对象，一个不可变对象或其他任何东西
+
+理解Redux 主要理解3个概念：
+
+1.Action 
+
+Action说白了就是一个带type属性的JavaScript对象，长下面这样：
+
+	{
+	
+	type:ADD_TODO,
+	text:'Build my first app'
+	
+	}
+
+2.Store
+
+Store就是我们存取状态数据的地方，外加可以订阅状态数据改变时触发的事件。
+
+3.Reducer
+
+唯一不好理解的可能就是reducer了，首先它的命名并不代表它的含义，完全是因为它和：
+
+//javascript 中Array的reduce方法
+【0,1,2,3,4】.reduce(prev,curr)=>prev+curr);
+//reducer
+(previousState,action)=>newState

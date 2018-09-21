@@ -1,0 +1,146 @@
+react-router
+使用时，路由器router就是react的一个组件
+
+router组件本身只是一个容器，真正的路由要通过route组件定义
+
+route组件定义了url路径与组件的对应关系，可以同时使用多个route组件
+
+route组件可以嵌套
+
+例：export default React.createClass({
+  render() {
+    return <div>
+      {this.props.children}
+    </div>
+  }
+})
+<App><Repos/></App>
+
+App组件的this.props.children属性就是子组件.
+
+子路由也可以不写在Router组件里面，单独传入Router组件的routes属性
+
+route组件的path属性指定路由的匹配规则，这个属性是可以省略的，这样，不管路由是否匹配，总会加载指定组件
+
+通配符规则:
+1.paramName  匹配url的一个部分，直到遇到下一个“/”,"?","#"为止。这个路径参数可以通过this.props.params.paramName取出。
+
+2.（）表示url的这个部分是可选的
+
+3.“**”匹配任意字符，直到下一个“/”，“？”，“#”为止。匹配方式是贪婪模式。
+
+路由匹配规则是从上到下执行，一旦发现匹配，就不再其余的规则了。
+
+Redirect组件
+<Redirect>组件用于路由的跳转，即用户访问一个路由，会自动跳转到另一个路由。
+
+IndexRedirect组件
+IndexRedirect组件用于访问根路由的时候，将用户重定向到某个子组件
+
+Link
+Link组件用于取代<a>元素，生成一个链接，允许用户点击后跳转到另一个路由，他基本上是<a>元素的react版本，可以接受Router的状态。
+
+如果希望当前的路由与其他路由有不同样式，这是可以使用link组件的activeStyle属性。
+
+IndexLink
+如果链接到跟路由/，不要使用Link组件，而要使用IndexLink组件。
+这是因为对于跟路由来说，activeStyle和activeClassName会失效，或者说总会生效，因为/会匹配任何子路由，而IndexLink组件会使用路径的精确匹配。
+
+实际上，IndexLink就是对Link组件onlyActiveOnIndex属性的包装。
+
+history属性
+Router组件的history属性，用来监听浏览器地址栏的变化，并将url解析成一个地址对象，供React Router匹配
+
+history属性可以设置三种值
+	browserHistory
+	hashHistory
+	createMemoryHistory
+如果设为hashHistory，路由将通过url的hash部分（#）切换。
+
+路由器不用向服务器发起请求就会切换路由，所以可以把每个组件假想为一个完整的新页面。
+
+
+
+使用方法：
+在react的使用中，一般要引入两个包，react和react-dom，还需要引入react-router-dom，还需要react-router-redux.
+
+主要组件简介：
+
+<Router>
+<Router>是用来保持与location的同步的。
+Router是所有路由组件共用的底层接口，一般我们的应用并不会使用这个接口，而是使用高级的路由。
+
+<BrowserRouter>
+使用HTML5提供的historyAPI来保持UI和URL的同步
+
+
+<HashRouter>
+使用URL的hash来保持UI和URL的同步。
+
+
+<MemoryRouter>
+能在内存保存你URL的历史记录
+
+
+<NativeRouter>
+为使用React Native提供路由支持
+
+
+<StaticRouter>
+从不会改变地址
+
+
+<Router>组件下只允许存在一个子元素，如存在多个则会报错
+
+
+<Route>主要作用就是当一个location匹配路由的path时，渲染某些UI
+
+
+<Route>组件属性：
+
+path(string):路由匹配路径。（没有path属性的Route总是会匹配）；
+
+exact（bool）：为true时，则要求路径与location.pathname必须完全匹配；
+
+strict（bool）：true的时候，有结尾斜线的路径只能匹配有斜线的location.pathname；
+
+
+新版的路由为<Route>提供了三种渲染内容的方法：
+
+<Route component>：在地址匹配的时候React的组件才会被渲染，route props也会随着一起被渲染；
+
+<Route render>：这种方式对于内联渲染和包装组件却不引起意料之外的重新挂载特别方便；
+
+<Route children>：与render属性的工作方式基本一样，除了它是不管地址匹配与否都会被调用。
+
+
+重点：
+
+<Route component>的优先级要比<Route render>高，所以不要在同一个<Route>中同时使用这两个属性。
+
+
+<Link>
+
+to(string/object):要跳转的路径或地址；
+
+replace(bool):为true时，点击链接后将使用新地址替换掉访问历史记录里面的原地址；为false时，点击链接后将在原有访问历史记录的基础上添加一个新的记录。默认为false；
+
+
+<NavLink>
+<NavLink>是<Link>的一个特定版本，会在匹配上当前url的时候会给已经渲染的元素添加样式参数，组件属性为：
+
+activeClassName(string):设置选中样式，默认值为active；
+
+activeStyle（object）：当元素被选中时，为此元素添加样式；
+
+exact（bool）：为true时，只有当地址完全匹配class和style才会应用；
+
+strict（bool）：为true时，在确定位置是否与当前url匹配时，将考虑位置pathname后的斜线；
+
+isActive（func）;判断链接是否激活的额外逻辑的功能；
+
+
+
+
+
+

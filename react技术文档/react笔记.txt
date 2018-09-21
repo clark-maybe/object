@@ -1,0 +1,61 @@
+非DOM属性：dangerouslySetInnerHTML  ref  key
+
+
+dangerouslySetInnerHTML:在jsx中直接插入HTML代码
+
+
+ref:父组件引用子组件
+
+key:提高渲染性能
+
+源码阅读tips
+
+从执行顺序入手
+
+适当忽略细节
+
+重视笔记
+
+反复阅读
+
+
+
+react组件的生命周期分为三个阶段：1.初始化 2.运行中 3.销毁
+
+在每个阶段发生状态转变的时候都会触发钩子函数，
+
+初始化阶段可以触发的钩子函数：getDaultProps(获取实例的默认属性)
+   getInitialState(获取实例的初始化状态)
+
+componentWillMount(组件即将被渲染到页面上) 
+ render(生成虚拟DOM节点并放置到页面中)
+
+componentDidMount(组件已经被渲染到了页面) 
+ 触发顺序由上到下
+
+注意！ getDaultProps只会在第一个实例被调用的时候触发
+
+运行中可以出发的钩子函数：componentWillReceiveProps(组件将要接收到属性的时候调用)
+
+shouldComponentUpdate(当组件接收到新属性或者新状态的时候就会触发这个函数)
+
+compeonentWillUpdate(更新操作)
+
+render(同上)
+
+componentDidUpdate(真正的dom被渲染完成后调用)
+
+销毁阶段可以触发的钩子函数：
+componentWillUnmount(销毁操作真正执行之前调用)
+
+
+
+
+
+属性和状态
+
+属性的含义：
+this.props 
+属性是不可以修改的 属性是不允许组件自己修改的
+
+属性的用法：

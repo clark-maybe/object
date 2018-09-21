@@ -1,0 +1,48 @@
+响应式布局
+动态的获取窗口的大小来更改布局方式
+两种方式。
+1.获取你终端的类型，动态分配你的网站。（后端分发）
+2.把样式写在一起，通过窗口大小来改变布局样式。
+
+@media
+.screen（屏幕的意思）是媒体类型里的一种，css2.1定义了10种媒体类型。
+关键字
+and  not  only
+（min-width：400px）就是媒体特性，其被放置在一对圆括号内。
+
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+移动端适配的关键meta
+
+响应式不要把数据写死，关键。
+
+******重中之重：
+写法：
+<link rel="stylesheet" type="text/css" href="styleB.css" media="screen and (min-width:600px)and(max-width:800px)">
+
+<link rel="stylesheet" type="text/css" href="styleA.css" media="screen and (min-width:400px)">
+
+@media screen and (max-width:600px){
+/*当屏幕尺寸小于600px时，应用下面的css样式*/
+.class{
+   background:#ccc;
+}
+}
+
+<link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio:2)" type="text/css" href="iphone4.css"/>
+/*(orientation:portrait)横向(landscape)*/
+
+注意事项：
+1.hack
+<!--[if it IE9]>
+<script src="http://css3-mediaqueries-js.googlecode.com.svn.trunk.css3mediaqueries.js"></script><![endif]-->
+
+2.html{
+font-size:62.5%
+}
+
+font-size:2em==font-size:20px
+百分比 不要固定像素
+
+box-sizing:border-box；
+
+差一个大作业没做，js之前

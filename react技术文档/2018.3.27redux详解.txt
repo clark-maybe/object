@@ -1,0 +1,74 @@
+2018.3.27  redux 详解
+
+大纲
+
+store
+
+action
+
+reducer
+
+dispatch
+
+middleware
+
+首先，react中，数据是单向流动的
+
+redux改变了react单向数据的一些问题，他提供了整个应用唯一的数据源store   这个数据源是随处可以访问的，不需要靠父子相传，并且，还提供了更新这个数据源的方法，同时也是随处可以使用的
+
+
+store  
+
+store是redux提供的唯一数据源，他存储了整个应用的state，并且提供了获取state的方法，store.getState()
+
+store是只读的
+
+redux没有提供直接修改数据的方法，改变state的唯一方法就是触发（dispatch）action
+
+
+action
+
+action是一个用于描述已发生事件的普通对象
+
+简单来说，就是 你干了一件什么事情。
+
+但是简单讲了你干的事情，我们并不知道你干的这件事产生了什么效果，于是有了一个专门负责描述某个行动对应产生某种效果的机构，叫做reducer
+
+
+reducer
+
+reducer只是一个接收state和action，并返回新的state的函数
+
+他就像一部法典，根据你所做的事情，提供对应的后果，这个后果直接对数据源起作用。
+
+
+例：
+两个组件，一个身份证组件，一个弹窗组件，那么应用的state树应该是这样的：
+
+store.getState()
+{
+card:{
+	name:'Jack',
+	picture:'a.jpg'
+	},
+	dialog:{
+	status:false
+	}
+	}
+
+action本质上是一个普通的js对象，因为它只是一个用来描述事件的对象，先来两个action：
+
+	{
+	type:'_name1',
+	name:'name1'
+	}
+
+	{
+	type:'_picture'
+	picture:'1.jpg'
+	}
+
+
+action都会带一个type属性，这是属性是必选的，而其他的内容，比如name，picture都是可选的，他们是由action携带，最后传递给reducer的内容，就好比我说我要改名字，这是事件，但是我没有说我要改成什么名字，这个操作就不完整，所以我还要补充说，我要改名叫什么，所以我还需要提供一个name给你，这才能完整实现一个动作，这些附属的参数，我们称之为payload（载荷）。
+
+我们说过payload是可选的，也就是说，有些动作的触发是不需要其他信息的，比如‘激活弹窗’，‘关闭弹窗’等等，这类动作只需要一个type就可以传达意思了
